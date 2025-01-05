@@ -131,8 +131,9 @@
 4020 _IOTPUT("device/leds/trans_ms",100)
 4030 LD$="device/leds/data":GOSUB 4500:
 4040 RETURN
-4300 '---- LED data update : LX=LED data index : use LD$,L,R,Z, ----
+4300 '---- LED data update : LX=LED data index : use LD$,LV$ ----
 4305 _IOTPUT(LD$,LV$(LX)):RETURN
+4307 '---- <NOT USED> LED data update : LX=LED data index : use LD$,LE$,L,R,Z ----
 4310 LE$=LV$(LX)
 4320 OUT&H58,&HE0:OUT&H58,1:OUT&H58,&H53
 4330 OUT&H58,&HC0:L=LEN(LD$):OUT&H58,L:FORZ=1TOL:OUT&H58,ASC(MID$(LD$,Z,1)):NEXTZ:OUT&H58,0:R=INP(8)
@@ -159,7 +160,6 @@
 4850 LV$(14)=LV$(13)+CHR$(&H44)+CHR$(&H4)
 4860 LV$(15)=LEFT$(LV$(14),18)+CHR$(&HFF)+CHR$(&HF)
 4870 RETURN
-4890 RETURN
 5500 '---- Vibration ON/OFF with LED ----
 5510 TT=TIME:TIME=0
 5515 LX=C:GOSUB 4300
@@ -183,4 +183,3 @@
 5870 SWAP L1,L2
 5880 NEXTI
 5890 RETURN
-
